@@ -3,6 +3,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/input";
 import { validateEmail } from "../../utils/helpers";
+
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -13,22 +14,40 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if(!validateEmail(email)){
+
+    // Trim email to remove accidental whitespace
+    const trimmedEmail = email.trim();
+    if (!validateEmail(trimmedEmail)) {
       setError("Please enter a valid email address");
       setLoading(false);
       return;
     }
-    if(password.length >= 8){
+
+    // Fix password length validation
+    if (password.length < 8) {
       setError("Password must be at least 8 characters");
       setLoading(false);
       return;
     }
+
     setError("");
-    const data = { email, password };
+    const data = { email: trimmedEmail, password };
+
+    try {
+      // Example API call (replace with actual implementation)
+      // const response = await api.login(data);
+      console.log("Login data:", data); // Placeholder
+      setLoading(false);
+      navigate("/dashboard"); // Example navigation
+    } catch (err) {
+      setError("Login failed. Please try again.");
+      setLoading(false);
+    }
   };
+
   return (
     <AuthLayout>
-      <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center ">
+      <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
         <h3 className="text-xl font-semibold text-black">Welcome Back</h3>
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Please enter your details to log in
@@ -36,14 +55,14 @@ export default function Login() {
         <form onSubmit={handleSubmit}>
           <Input
             value={email}
-            onChange={(target) => setEmail(target.value)}
+            onChange={(e) => setEmail(e.target.value)} // Correct event handling
             placeholder="Enter your email"
-            type="text"
+            type="email" // Use type="email" for better UX
             label="Email"
           />
           <Input
             value={password}
-            onChange={(target) => setPassword(target.value)}
+            onChange={(e) => setPassword(e.target.value)} // Correct event handling
             type="password"
             label="Password"
             placeholder="Min 8 Characters"
@@ -51,7 +70,7 @@ export default function Login() {
           <button type="submit" className="btn-primary mt-6" disabled={loading}>
             {loading ? "Loading..." : "Login"}
           </button>
-          {error && <p className="text-red-500 text-xs pb-2.5 ">{error}</p>}
+          {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
           
           <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?{" "}
@@ -62,5 +81,5 @@ export default function Login() {
         </form>
       </div>
     </AuthLayout>
-  ); 
+  );
 }
