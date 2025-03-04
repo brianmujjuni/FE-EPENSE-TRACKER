@@ -22,12 +22,12 @@ export default function SignUp() {
       setLoading(false);
       return;
     }
-    if (password.length >= 8) {
+    if (!password) {
       setError("Password must be at least 8 characters");
       setLoading(false);
       return;
     }
-    if(!fullName){
+    if (!fullName) {
       setError("Please enter your full name");
       setLoading(false);
       return;
@@ -47,22 +47,22 @@ export default function SignUp() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               value={fullName}
-              onchange={({ target }) => setFullName(target.value)}
+              onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your full name"
               type="text"
               label="Full Name"
             />
             <Input
               value={email}
-              onChange={(target) => setEmail(target.value)}
+              onChange={(e) => setEmail(e.target.value)} // Correct event handling
               placeholder="Enter your email"
-              type="text"
+              type="email" // Use type="email" for better UX
               label="Email"
             />
             <div className="col-span-2">
               <Input
                 value={password}
-                onChange={(target) => setPassword(target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 label="Password"
                 placeholder="Min 8 Characters"
