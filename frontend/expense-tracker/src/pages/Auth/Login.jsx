@@ -2,6 +2,7 @@ import React from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/input";
+import { validateEmail } from "../../utils/helpers";
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -32,17 +33,17 @@ export default function Login() {
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Please enter your details to log in
         </p>
-        <form onSubmit={() => {}}>
+        <form onSubmit={handleSubmit}>
           <Input
             value={email}
-            onchange={(e) => setEmail(e.target.value)}
+            onChange={(target) => setEmail(target.value)}
             placeholder="Enter your email"
-            type="email"
+            type="text"
             label="Email"
           />
           <Input
             value={password}
-            onchange={(e) => setPassword(e.target.value)}
+            onChange={(target) => setPassword(target.value)}
             type="password"
             label="Password"
             placeholder="Min 8 Characters"
