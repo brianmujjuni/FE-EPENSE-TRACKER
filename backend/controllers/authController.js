@@ -35,6 +35,28 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-exports.loginUser = async (req, res) => {};
+exports.loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Email and password fields required" });
+  }
+  try {
+    const user = await User.findOne({ email });
+    if (!user || !(await user.comparePassword(password))) {
+      res
+        .status(404)
+        .json({ message: "User email and password are not correct" });
+    }
+    res
+      .status(200)
+      .json({ id: user._id, user, token: genearateToken(user._id) });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error loging in  user", error: error.message });
+  }
+};
 
 exports.getUserInfo = async (req, res) => {};
