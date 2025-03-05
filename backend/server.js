@@ -20,5 +20,7 @@ connectDb();
 
 app.use("/api/v1/auth",authRoutes);
 
+app.use("/uploads",express.static(path.join(__dirname,'uploads')))
+
 const PRORT = process.env.PORT || 5000;
 app.listen(PRORT, () => console.log(`Server is running on port ${PRORT}`));
