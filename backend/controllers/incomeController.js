@@ -1,5 +1,5 @@
-const User = require("../models/userModel");
-const Income = require("../models/incomeModel");
+const User = require("../models/User");
+const Income = require("../models/Income");
 exports.addIncome = async (req, res) => {
   const userId = req.user.id;
   try {
@@ -21,6 +21,22 @@ exports.addIncome = async (req, res) => {
   }
 };
 
-exports.getAllIncome = async (req, res) => {};
-exports.deleteIncome = async (req, res) => {};
+exports.getAllIncome = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const income = await Income.find({ userId }).sort({ date: -1 });
+    res.status(200).json(income);
+  } catch (error) {
+    res.status(500).json({err: error.message})
+  }
+};
+exports.deleteIncome = async (req, res) => {
+    // const userId = req.user.id
+    try {
+        await Income.findByIdAndDelete(req.params.id)
+        res.status(200).json({message: "Income deleted successfully"})
+    } catch (error) {
+        
+    }
+};
 exports.downloadIncomeExcel = async (req, res) => {};
