@@ -4,6 +4,7 @@
     "axios": "^1.8.1",
     "emoji-picker-react": "^4.12.0",
     "moment": "^2.30.1",
+    "nodemon": "^3.1.9",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.2.0",
