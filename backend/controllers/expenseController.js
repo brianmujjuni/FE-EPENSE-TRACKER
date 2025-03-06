@@ -8,7 +8,7 @@ exports.addExpense = async (req, res) => {
     if (!category || !amount || !date) {
       return res.status(400).json({ message: "All fields are required" });
     }
-    const expense = Expense.create({
+    const expense =new Expense({
       userId,
       icon,
       category,
