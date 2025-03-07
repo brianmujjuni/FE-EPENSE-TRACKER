@@ -3,6 +3,8 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/input";
 import { validateEmail } from "../../utils/helpers";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -36,12 +38,20 @@ export default function Login() {
     try {
       // Example API call (replace with actual implementation)
       // const response = await api.login(data);
-      console.log("Login data:", data); // Placeholder
-      setLoading(false);
-      navigate("/dashboard"); // Example navigation
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, data);
+      const { token, user } = response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        navigate("/dashboard");
+        setLoading(false);
+      }
     } catch (err) {
-      setError("Login failed. Please try again.");
-      setLoading(false);
+      if (err.response && err.response.data.message) {
+        setError(err.response.data.message);
+        setLoading(false);
+      } else {
+        setError("Something went wrong. Please try again");
+      }
     }
   };
 
@@ -71,7 +81,7 @@ export default function Login() {
             {loading ? "Loading..." : "Login"}
           </button>
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
-          
+
           <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?{" "}
             <Link className="font-medium text-primary underline" to="/signup">
