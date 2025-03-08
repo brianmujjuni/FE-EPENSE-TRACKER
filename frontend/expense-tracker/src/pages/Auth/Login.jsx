@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/input";
 import { validateEmail } from "../../utils/helpers";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
+import { UserContext } from "../../context/UserContext"
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+
+  const {updateUser} = useContext(UserContext)
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -42,6 +46,7 @@ export default function Login() {
       const { token, user } = response.data;
       if (token) {
         localStorage.setItem("token", token);
+        updateUser(user)
         navigate("/dashboard");
         setLoading(false);
       }
