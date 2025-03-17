@@ -8,7 +8,7 @@ import {
 export const SIDE_MENU_DATA = [
   {
     id: "01",
-    label: "Dasboard",
+    label: "Dashboard",
     icon: LuLayoutDashboard,
     path: "/dashboard",
   },
@@ -28,6 +28,6 @@ export const SIDE_MENU_DATA = [
     id: "04",
     label: "Logout",
     icon: LuLogOut,
-    path: "Logout"
-  }
+    path: "Logout",
+  },
 ];
