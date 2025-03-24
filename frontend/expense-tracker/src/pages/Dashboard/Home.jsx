@@ -73,7 +73,7 @@ export default function () {
             totalExpense={dashboardData?.totalExpense}
           />
           <ExpenseTransactions
-            transactions={dashboardData?.las30DaysExpense?.transactions}
+            transactions={dashboardData?.last30DaysExpense?.transactions}
             onSeeMore={() => navigate("/expense")}
           />
         </div>
