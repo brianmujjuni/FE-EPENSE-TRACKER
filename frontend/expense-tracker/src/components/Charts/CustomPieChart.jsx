@@ -33,7 +33,7 @@ export default function CustomPieChart({
           ))}
         </Pie>
         <Tooltip content={CustomToolTip} />
-        <Legend />
+        <Legend content={CustomLegend} />
         {showTextAnchor && (
           <>
             <text
