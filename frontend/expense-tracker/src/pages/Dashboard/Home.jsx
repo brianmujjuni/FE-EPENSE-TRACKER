@@ -9,6 +9,7 @@ import InfoCard from "../../components/Cards/InfoCard";
 import { LuHandCoins,LuWalletMinimal } from "react-icons/lu";
 import { addThousandsSeperator } from "../../utils/helpers";
 import RecentTransactions from "../../components/Dashaboard/RecentTransactions";
+import FinanceOverview from "../../components/Dashaboard/FinanceOverview";
 export default function () {
   useUserAuth();
   const navigate = useNavigate();
@@ -62,7 +63,9 @@ export default function () {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <RecentTransactions transactions={dashboardData?.recentTransaction} onSeeMore={()=> navigate("/expense")}/>
+        <FinanceOverview totalBalance={dashboardData?.totalBalance || 0} totalIncome={dashboardData?.totalIncome || 0} totalExpense={dashboardData?.totalExpense} />
         </div>
+       
       </div>
     </DashboardLayout>
   );
