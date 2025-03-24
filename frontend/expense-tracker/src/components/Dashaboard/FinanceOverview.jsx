@@ -11,6 +11,7 @@ export default function FinanceOverview({
     { name: "Total Balance", amount: totalBalance },
     { name: "Total Expense", amount: totalExpense },
     { name: "Total Income", amount: totalIncome },
+   
   ];
   return (
     <div className="card">
