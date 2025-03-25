@@ -13,6 +13,7 @@ import FinanceOverview from "../../components/Dashaboard/FinanceOverview";
 import ExpenseTransactions from "../../components/Dashaboard/ExpenseTransactions";
 import Last30DaysExpense from "../../components/Dashaboard/Last30DaysExpense";
 import RecentIncomeWithChart from "../../components/Dashaboard/RecentIncomeWithChart";
+import RecentIncome from "../../components/Dashaboard/RecentIncome";
 export default function () {
   useUserAuth();
   const navigate = useNavigate();
