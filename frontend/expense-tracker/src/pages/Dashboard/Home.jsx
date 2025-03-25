@@ -12,6 +12,7 @@ import RecentTransactions from "../../components/Dashaboard/RecentTransactions";
 import FinanceOverview from "../../components/Dashaboard/FinanceOverview";
 import ExpenseTransactions from "../../components/Dashaboard/ExpenseTransactions";
 import Last30DaysExpense from "../../components/Dashaboard/Last30DaysExpense";
+import RecentIncomeWithChart from "../../components/Dashaboard/RecentIncomeWithChart";
 export default function () {
   useUserAuth();
   const navigate = useNavigate();
@@ -79,6 +80,16 @@ export default function () {
           />
           <Last30DaysExpense
             data={dashboardData?.last30DaysExpense?.transactions || []}
+          />
+          <RecentIncomeWithChart
+            data={
+              dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []
+            }
+            totalIncome={dashboardData?.totalIncome || 0}
+          />
+          <RecentIncome
+            transactions={dashboardData?.last60DaysIncome?.transactions || []}
+            onSeeMore={()=> navigate("/income")}
           />
         </div>
       </div>
