@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { prepareExpenseBarChartData } from "../../utils/helpers";
 
 export default function Last30DaysExpense({ data }) {
   const [chartData, setChartData] = useState([]);
